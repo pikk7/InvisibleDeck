@@ -1,9 +1,8 @@
-
 name: Deploy PWA to GitHub Pages
 
 on:
   push:
-    branches: [ "master" ]   # <-- ha master a fő branch
+    branches: ["master"] # <- nálad master az alapág
   workflow_dispatch:
 
 permissions:
@@ -25,16 +24,23 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          # Vite/React stabilan fut 18/20 alatt. 22 is mehet, de 18 a biztos.
-          node-version: '18'
+          node-version: "18" # Vite-hoz stabil, 20 is jó
+          cache: "npm"
 
-      - name: Install deps
-        run: npm ci
+      - name: Install dependencies
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm i
+          fi
 
       - name: Build
         run: npm run build
 
-      - name: Upload artifact
+      # FONTOS: Pages-hez NE uses: actions/upload-artifact@v3/v4,
+      # hanem a hivatalos upload-pages-artifact akciót!
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v2
         with:
           path: dist
