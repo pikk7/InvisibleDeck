@@ -24,7 +24,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "18" # 18/20 stabil Vite-hoz
+          node-version: "22" # ← Vite kéri: 20.19+ vagy 22.12+, legyen 22
           cache: "npm"
 
       - name: Install dependencies
@@ -38,9 +38,8 @@ jobs:
       - name: Build
         run: npm run build
 
-      # A Pages artifact feltöltésére ezt használd (NEM upload-artifact@v3/v4):
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v2
         with:
           path: dist
 
@@ -52,8 +51,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      # Opcionális, de sokszor segít: Pages konfigurálása
-      - name: Setup Pages
+      - name: Configure Pages
         uses: actions/configure-pages@v5
 
       - name: Deploy to GitHub Pages

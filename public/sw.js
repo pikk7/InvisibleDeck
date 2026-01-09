@@ -1,16 +1,17 @@
-const CACHE = "deck-pwa-v" + self.crypto.randomUUID();
+const CACHE = "deck-pwa-" + (self.crypto?.randomUUID?.() || Date.now());
 const ASSETS = [
-  "/",
-  "/index.html",
-  "/manifest.webmanifest",
-  "/src/main.tsx",
-  "/src/app/App.tsx",
-  "/src/index.css",
+  // Alap assetek – a SW scope alatt látod majd (BASE_URL alútvonal)
+  "./",
+  "./index.html",
+  "./assets/index-*.js",
+  "./assets/index-*.css",
+  "./manifest.webmanifest",
 ];
-self.addEventListener("install", (e) =>
-  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASSETS)))
-);
-self.addEventListener("activate", (e) =>
+
+self.addEventListener("install", (e) => {
+  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASSETS)));
+});
+self.addEventListener("activate", (e) => {
   e.waitUntil(
     caches
       .keys()
@@ -19,8 +20,8 @@ self.addEventListener("activate", (e) =>
           keys.filter((k) => k !== CACHE).map((k) => caches.delete(k))
         )
       )
-  )
-);
-self.addEventListener("fetch", (e) =>
-  e.respondWith(caches.match(e.request).then((r) => r || fetch(e.request)))
-);
+  );
+});
+self.addEventListener("fetch", (e) => {
+  e.respondWith(caches.match(e.request).then((r) => r || fetch(e.request)));
+});
