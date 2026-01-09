@@ -329,6 +329,7 @@ button.ghost {
   color: #fff;
   display: flex;
   justify-content: space-between;
+  z-index: 999;
 }
 .admin-actions {
   margin-top: 10px;

@@ -12,7 +12,7 @@ A rendszer automatikusan iOS‑re vagy Androidra szabott feloldási élményt mu
 - iOS‑szerű **FaceID** képernyő + **6 számjegyű PIN feloldó**
 - Android‑szerű **4×4 pattern lock** feloldó
 - **Automatikus platformdetektálás** (User Agent alapján)
-- Titkos **Admin Panel** (hosszú nyomás bal‑alsó sarokban)
+- Titkos **Admin Panel** (hosszú nyomás bal‑alsó sarokban) **(fejlesztes alatt)**
 - Állítható **HUD** (Android pattern debug overlay)
 - **Force Mode** (iOS / Android / Auto)
 - **FaceID debug mód**
@@ -104,7 +104,7 @@ A **kezdő pont kvadránsa** számít:
 
 ---
 
-## 🛠 Admin Panel (rejtett funkciók)
+## 🛠 Admin Panel (rejtett funkciók) **(fejlesztes alatt)**
 
 #### Belépés
 
