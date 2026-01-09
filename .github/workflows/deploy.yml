@@ -1,8 +1,9 @@
+
 name: Deploy PWA to GitHub Pages
 
 on:
   push:
-    branches: ["master"]
+    branches: [ "master" ]   # <-- ha master a fő branch
   workflow_dispatch:
 
 permissions:
@@ -10,17 +11,31 @@ permissions:
   pages: write
   id-token: write
 
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          node-version: "18"
-      - run: npm install
-      - run: npm run build
-      - uses: actions/upload-pages-artifact@v2
+          # Vite/React stabilan fut 18/20 alatt. 22 is mehet, de 18 a biztos.
+          node-version: '18'
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
         with:
           path: dist
 
@@ -30,6 +45,8 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+
     steps:
-      - id: deployment
+      - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v3
