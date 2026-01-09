@@ -1,13 +1,13 @@
 # 📱 Invisible Deck – React PWA
 
-### _Phone Unlock Illusion / Magic Trick System Overview_
+## _Phone Unlock Illusion / Magic Trick System Overview_
 
 Ez egy **React + Vite + PWA** alapú mobilbűvész‑alkalmazás, amely a telefon feloldásának illúzióját használja arra, hogy a néző által megnevezett kártyát „varázsütésre” megjelenítse.  
 A rendszer automatikusan iOS‑re vagy Androidra szabott feloldási élményt mutat, a bűvész pedig a folyamat közben titokban beviszi a választott lapot.
 
 ---
 
-# 🔥 Fő funkciók
+## 🔥 Fő funkciók
 
 - iOS‑szerű **FaceID** képernyő + **6 számjegyű PIN feloldó**
 - Android‑szerű **4×4 pattern lock** feloldó
@@ -21,7 +21,7 @@ A rendszer automatikusan iOS‑re vagy Androidra szabott feloldási élményt mu
 
 ---
 
-# 🖥 Projektstruktúra
+## 🖥 Projektstruktúra
 
 ```
 src/
@@ -51,17 +51,17 @@ public/
 
 ---
 
-# 🔐 Feloldási logikák
+## 🔐 Feloldási logikák
 
-## iOS Flow
+### iOS Flow
 
-### 1) FaceID overlay
+#### 1) FaceID overlay
 
 - iOS‑szerű animáció
 - 1,2 másodperc után → **„Face ID sikertelen”**
 - automatikusan vagy gombnyomással tovább → PIN képernyő
 
-### 2) PIN kód (ez viszi be a lapot)
+#### 2) PIN kód (ez viszi be a lapot)
 
 | PIN pozíció       | Jelentés                                         |
 | ----------------- | ------------------------------------------------ |
@@ -71,13 +71,13 @@ public/
 
 ---
 
-## Android Flow
+### Android Flow
 
-### 4×4 Pattern lock
+#### 4×4 Pattern lock
 
 A bűvész mintát rajzol → ebből számolódik a kártya.
 
-### Szín
+#### Szín
 
 A **kezdő pont kvadránsa** számít:
 
@@ -88,14 +88,14 @@ A **kezdő pont kvadránsa** számít:
 | Bal‑alsó   | ♣    |
 | Jobb‑alsó  | ♠    |
 
-### Rang
+#### Rang
 
 - Rang = `(bejárt pontok száma - 1) mod 13` → **A..K**
 - Minimum 2 pont szükséges
 
 ---
 
-# 🃏 Kártyamegjelenítés
+## 🃏 Kártyamegjelenítés
 
 - valószerű játékkártya UI
 - felső‑bal + alsó‑jobb sarok index
@@ -104,13 +104,13 @@ A **kezdő pont kvadránsa** számít:
 
 ---
 
-# 🛠 Admin Panel (rejtett funkciók)
+## 🛠 Admin Panel (rejtett funkciók)
 
-### Belépés
+#### Belépés
 
 **Lock Screen → bal‑alsó sarok → 2 másodperc hosszú nyomás**
 
-### Funkciók:
+#### Funkciók:
 
 - **HUD megjelenítése** (Androidon)
 - **UI mód választása**:
@@ -125,9 +125,9 @@ A **kezdő pont kvadránsa** számít:
 
 ---
 
-# ⚙️ Settings architektúra
+## ⚙️ Settings architektúra
 
-### Settings objektum
+#### Settings objektum
 
 ```ts
 interface Settings {
@@ -137,13 +137,13 @@ interface Settings {
 }
 ```
 
-### Mi tárolja?
+#### Mi tárolja?
 
 - **SettingsContext** (React Context + Reducer)
 - Mentés → `localStorage`
 - Betöltés → app induláskor (`loadSettings()`)
 
-### Támogatott akciók:
+#### Támogatott akciók:
 
 - `SET_HUD`
 - `SET_FORCE_MODE`
@@ -153,7 +153,7 @@ interface Settings {
 
 ---
 
-# 🎯 Felhasználói élmény összefoglaló
+## 🎯 Felhasználói élmény összefoglaló
 
 1. **Lock Screen**
 2. Néző kimondja a kártyát
@@ -168,28 +168,38 @@ A néző 100%-ban azt látja, mintha tényleg feloldanád a telefonodat.
 
 ---
 
-# 📦 Futatás
+## 📦 Futatás
 
-### Fejlesztés
+#### Fejlesztés
 
 ```sh
 npm install
 npm run dev
 ```
 
-### Build
+#### Build
 
 ```sh
 npm run build
 npm run preview
 ```
 
-### Telepíthető PWA
+#### Telepíthető PWA
 
 - tartalmaz manifestet és service workert
 - offline működés támogatott
 - iOS/Android home screenre telepíthető
 
-# Demo
+## Demo
 
 [Invisible Deck Demo](https://pikk7.github.io/InvisibleDeck/)
+
+Weblap megnyitása után, a menüből megnyitni és a **Add to Home Screen** gomb, végül az **Install** gomb és ujra **Install**
+
+Utána Invisible Deck néven elérhető alkalmazás lesz.
+
+## Test
+
+Android 16
+One UI 8
+Samsung Galaxy S24 Ultra 
