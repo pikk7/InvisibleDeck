@@ -6,11 +6,19 @@
       name="viewport"
       content="width=device-width, initial-scale=1, viewport-fit=cover"
     />
-    <title>Invisible Deck – Lock</title>
+
+    <title>Invisible Deck – PWA</title>
+
+    <!-- PWA: manifest MUST include repo name on GitHub Pages -->
+    <link rel="manifest" href="/InvisibleDeck/manifest.webmanifest" />
+
+    <!-- Optional PWA meta -->
+    <meta name="theme-color" content="#0b0b0d" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <script type="module" src="/InvisibleDeck/src/main.tsx"></script>
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-
