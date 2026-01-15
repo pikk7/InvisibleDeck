@@ -1,0 +1,44 @@
+{
+  "name": "Invisible Deck",
+  "short_name": "Invisible Deck",
+  "start_url": "/InvisibleDeck/",
+  "scope": "/InvisibleDeck/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+
+  "icons": [
+    {
+      "src": "/InvisibleDeck/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+
+  "shortcuts": [
+    {
+      "name": "Indítás iOS módban",
+      "short_name": "iOS Mode",
+      "url": "/InvisibleDeck/?force=ios",
+      "icons": [
+        {
+          "src": "/InvisibleDeck/icons/ios-shortcut.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Indítás Android módban",
+      "short_name": "Android Mode",
+      "url": "/InvisibleDeck/?force=android",
+      "icons": [
+        {
+          "src": "/InvisibleDeck/icons/android-shortcut.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    }
+  ]
+}

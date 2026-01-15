@@ -1,0 +1,372 @@
+:root {
+  color-scheme: dark;
+  --bg: #0b0b0d;
+  --fg: #f2f2f2;
+  --muted: #a1a1aa;
+  --blue: #2481ff;
+}
+* {
+  box-sizing: border-box;
+}
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Inter, Arial,
+    sans-serif;
+}
+
+/* Overlay screens – csak egy aktív egyszerre */
+.screen {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  min-height: 100svh;
+}
+@supports (height: 100dvh) {
+  .screen {
+    min-height: 100dvh;
+  }
+}
+.screen {
+  padding: env(safe-area-inset-top) env(safe-area-inset-right)
+    env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+/* Lock screen */
+.lock {
+  background: radial-gradient(1200px 600px at 50% -200px, #16161a, #0b0b0d);
+}
+.clock {
+  display: grid;
+  gap: 6px;
+  justify-items: center;
+  margin-top: 10vh;
+}
+.clock .time {
+  font-size: 84px;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+.clock .date {
+  color: var(--muted);
+  font-weight: 500;
+}
+.stub {
+  margin-top: 18vh;
+  width: min(92vw, 420px);
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+}
+.stub .bubble {
+  width: 34px;
+  height: 34px;
+  background: #999;
+  border-radius: 50%;
+  opacity: 0.4;
+}
+.stub .line {
+  height: 10px;
+  background: #999;
+  opacity: 0.25;
+  border-radius: 6px;
+  margin-top: 8px;
+}
+.stub .line.short {
+  width: 60%;
+}
+.swipe {
+  position: absolute;
+  bottom: 40px;
+  color: #c6c6c6;
+  font-size: 14px;
+}
+
+/* FaceID overlay */
+.faceid {
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(6px);
+}
+.faceid-card {
+  width: min(92vw, 380px);
+  padding: 24px;
+  border-radius: 16px;
+  background: rgba(20, 20, 24, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: grid;
+  place-items: center;
+  gap: 12px;
+}
+.face-outline {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 2px dashed rgba(255, 255, 255, 0.3);
+  position: relative;
+}
+.scan-ring {
+  width: 100px;
+  height: 100px;
+  border: 3px solid var(--blue);
+  border-radius: 50%;
+  animation: scan 1.2s ease-in-out infinite alternate;
+}
+@keyframes scan {
+  from {
+    transform: scale(0.9);
+    opacity: 0.6;
+  }
+  to {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+}
+.faceid-label {
+  color: #cfd9ff;
+  font-weight: 600;
+}
+.faceid-failed {
+  color: #fff;
+  font-weight: 700;
+  font-size: 18px;
+}
+.faceid-sub {
+  color: #cfcfd3;
+  font-size: 14px;
+}
+.faceid-actions {
+  display: flex;
+  gap: 10px;
+}
+button.primary {
+  background: var(--blue);
+  color: #fff;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 12px;
+}
+button.ghost {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 12px;
+}
+
+/* PIN */
+.passcode {
+  backdrop-filter: blur(6px);
+}
+.pc-title {
+  font-size: 18px;
+  color: #d9d9de;
+  margin-bottom: 16px;
+}
+.dots {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #3a3a44;
+}
+.dot.filled {
+  background: #fff;
+}
+.keypad {
+  width: min(92vw, 380px);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.keypad button {
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  background: #1e1e22;
+  border: 1px solid #2a2a34;
+  color: #fff;
+  font-size: 26px;
+}
+.keypad .del {
+  font-size: 20px;
+}
+.pc-footer {
+  position: absolute;
+  bottom: 28px;
+  color: #9fa3ad;
+  font-size: 14px;
+}
+
+/* Pattern */
+.pattern {
+  gap: 14px;
+}
+.pt-title {
+  font-size: 20px;
+  color: #d9d9de;
+}
+#pad {
+  background: #181818;
+  border: 1px solid #2a2a2a;
+  border-radius: 12px;
+  touch-action: none;
+}
+.pt-footer {
+  position: absolute;
+  bottom: 26px;
+  color: #9fa3ad;
+  font-size: 14px;
+}
+
+/* HUD (pattern) */
+.hud {
+  position: absolute;
+  top: env(safe-area-inset-top, 12px);
+  left: env(safe-area-inset-left, 12px);
+  background: rgba(20, 20, 24, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #e9e9ec;
+  border-radius: 10px;
+  padding: 10px 12px;
+  backdrop-filter: blur(4px);
+  min-width: 180px;
+}
+.hud-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 14px;
+}
+.hud-label {
+  color: #b9bbc3;
+}
+.hud-val {
+  font-weight: 700;
+  color: #fff;
+}
+
+/* Reveal card */
+.card-frame {
+  width: min(86vw, 360px);
+  height: min(120vw, 520px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  color: #111;
+  border-radius: 20px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  position: relative;
+  padding: 14px;
+}
+.corner {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+}
+.corner.tl {
+  top: 12px;
+  left: 12px;
+}
+.corner.br {
+  bottom: 12px;
+  right: 12px;
+  transform: rotate(180deg);
+}
+.pips {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 120px;
+  opacity: 0.18;
+}
+.pips.red {
+  color: #d41030;
+}
+.pips.black {
+  color: #101418;
+}
+.ghost {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--fg);
+  padding: 10px 14px;
+  border-radius: 12px;
+}
+
+/* Admin overlay */
+
+.admin-modal-root {
+  position: fixed;
+  inset: 0;
+  z-index: 10000; /* a legfelső réteg */
+  pointer-events: none; /* alapértelmezésben ne engedj interakciót */
+}
+.admin-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  pointer-events: auto; /* a backdrop megkapja a clicket (zárás), az alatta lévő UI nem */
+}
+.screen.admin {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 320px;
+  max-width: 90vw;
+  background: #111;
+  color: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  pointer-events: auto; /* a modal tartalom kattintható */
+}
+
+.admin-section {
+  width: min(520px, 92vw);
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  z-index: 999;
+}
+.admin-actions {
+  margin-top: 10px;
+}
+button.danger {
+  background: #c92a2a;
+  color: #fff;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 12px;
+}
+
+#admin-zone {
+  -webkit-touch-callout: none;
+  user-select: none;
+  touch-action: none; /* iOS/Safari: kevesebb scroll/zoom interferencia */
+  cursor: pointer;
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  width: 44px;
+  height: 44px;
+  z-index: 9999; /* magas Z, de ez önmagában nem elég */
+}
