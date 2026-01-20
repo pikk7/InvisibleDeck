@@ -93,9 +93,9 @@ A **kezdő pont kvadránsa** számít:
 | Bal‑alsó   | ♣    |
 | Jobb‑alsó  | ♠    |
 
-#### Rang
+#### Érték
 
-- Rang = `(bejárt pontok száma - 1) mod 13` → **A..K**
+- Érték = `(bejárt pontok száma - 1) mod 13` → **A..K**
 - Minimum 2 pont szükséges
 
 ---
@@ -215,3 +215,4 @@ A forditasok Copilottal voltak generalva.
 Android 16
 One UI 8
 Samsung Galaxy S24 Ultra
+
